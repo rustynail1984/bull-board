@@ -13,8 +13,7 @@
 }
 
 .header > .logo {
-  width: var(--menu-width);
-  flex-basis: var(--menu-width);
+  width: 200px;
   flex-shrink: 0;
   white-space: nowrap;
   text-align: start;
@@ -39,12 +38,12 @@
 }
 
 .header > .logo > .img.default {
-  width: 1.2em;
+  width: .8em;
   margin-bottom: 0.2em;
 }
 
 .header .content {
-  flex: 1;
+	flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,4 +53,36 @@
 
 .header + main {
   padding-top: var(--header-height);
+}
+
+.boardTitle {
+  font-size: 0.8em;
+  font-weight: 500;
+  color: var(--header-text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .toggleButton {
+    display: none;
+  }
+
+	.header > .logo {
+		width: var(--menu-width);
+		flex-basis: var(--menu-width);
+	}
+
+	.header > .logo > .img.default {
+		width: 1.2em;
+		margin-bottom: 0.2em;
+	}
+
+	.boardTitle {
+		font-size: 1em;
+	}
 }

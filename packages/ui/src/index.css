@@ -215,13 +215,21 @@ small {
   opacity: 0.85;
 }
 
-main {
-  padding-left: var(--menu-width);
-  min-height: 100%;
+main > div {
+  padding: 1rem;
+	max-width: 100vw;
+	overflow: hidden;
 }
 
-main > div {
-  padding: 2rem;
+@media (min-width: 768px) {
+  main {
+    padding-left: var(--menu-width);
+    min-height: 100%;
+  }
+
+	main > div {
+		padding: 2rem;
+	}
 }
 
 button {

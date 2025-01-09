@@ -7,6 +7,7 @@ import { FullscreenIcon } from '../Icons/Fullscreen';
 import { RedisIcon } from '../Icons/Redis';
 import { Settings } from '../Icons/Settings';
 import s from './HeaderActions.module.css';
+import cn from 'clsx';
 
 type ModalTypes = 'redis' | 'settings';
 
@@ -41,7 +42,7 @@ export const HeaderActions = () => {
           </Button>
         </li>
         <li>
-          <Button onClick={onClickFullScreen} className={s.button}>
+          <Button onClick={onClickFullScreen} className={cn(s.fullscreenButton, s.button)}>
             <FullscreenIcon />
           </Button>
         </li>

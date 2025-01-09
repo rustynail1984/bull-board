@@ -12,53 +12,56 @@ import { useDarkMode } from './hooks/useDarkMode';
 import { useLanguageWatch } from './hooks/useLanguageWatch';
 import { useQueues } from './hooks/useQueues';
 import { useScrollTopOnNav } from './hooks/useScrollTopOnNav';
+import { SidebarProvider } from './context/SidebarContext';
 
 const JobPageLazy = React.lazy(() =>
-  import('./pages/JobPage/JobPage').then(({ JobPage }) => ({ default: JobPage }))
+	import('./pages/JobPage/JobPage').then(({ JobPage }) => ({ default: JobPage }))
 );
 
 const QueuePageLazy = React.lazy(() =>
-  import('./pages/QueuePage/QueuePage').then(({ QueuePage }) => ({ default: QueuePage }))
+	import('./pages/QueuePage/QueuePage').then(({ QueuePage }) => ({ default: QueuePage }))
 );
 
 const OverviewPageLazy = React.lazy(() =>
-  import('./pages/OverviewPage/OverviewPage').then(({ OverviewPage }) => ({
-    default: OverviewPage,
-  }))
+	import('./pages/OverviewPage/OverviewPage').then(({ OverviewPage }) => ({
+		default: OverviewPage,
+	}))
 );
 
 export const App = () => {
-  useScrollTopOnNav();
-  const { actions: queueActions } = useQueues();
-  const { confirmProps } = useConfirm();
-  useLanguageWatch();
-  useDarkMode();
+	useScrollTopOnNav();
+	const { actions: queueActions } = useQueues();
+	const { confirmProps } = useConfirm();
+	useLanguageWatch();
+	useDarkMode();
 
-  useEffect(() => {
-    queueActions.updateQueues();
-  }, []);
+	useEffect(() => {
+		queueActions.updateQueues();
+	}, []);
 
-  return (
-    <>
-      <Header>
-        <Title />
-        <HeaderActions />
-      </Header>
-      <main>
-        <div>
-          <Suspense fallback={<Loader />}>
-            <Switch>
-              <Route path="/queue/:name/:jobId" render={() => <JobPageLazy />} />
-              <Route path="/queue/:name" render={() => <QueuePageLazy />} />
+	return (
+		<>
+			<SidebarProvider>
+				<Header>
+					<Title />
+					<HeaderActions />
+				</Header>
+				<main>
+					<div>
+						<Suspense fallback={<Loader />}>
+							<Switch>
+								<Route path="/queue/:name/:jobId" render={() => <JobPageLazy />} />
+								<Route path="/queue/:name" render={() => <QueuePageLazy />} />
 
-              <Route path="/" exact render={() => <OverviewPageLazy />} />
-            </Switch>
-          </Suspense>
-          <ConfirmModal {...confirmProps} />
-        </div>
-      </main>
-      <Menu />
-      <ToastContainer />
-    </>
-  );
+								<Route path="/" exact render={() => <OverviewPageLazy />} />
+							</Switch>
+						</Suspense>
+						<ConfirmModal {...confirmProps} />
+					</div>
+				</main>
+				<Menu />
+				<ToastContainer />
+			</SidebarProvider>
+		</>
+	);
 };

@@ -1,10 +1,10 @@
 .aside {
   position: fixed;
   z-index: 99;
-  top: var(--header-height);
-  left: 0;
+  top: var(--header-height, 0);
+  left: -100%;
   bottom: 0;
-  width: var(--menu-width);
+  width: 300px;
   background: linear-gradient(
     to bottom,
     hsl(217, 22%, 20%),
@@ -16,6 +16,21 @@
   display: flex;
   flex-direction: column;
   box-shadow: 4px 0 8px 3px rgba(38, 46, 60, 0.1);
+  transition: left 0.3s ease-in-out;
+	font-size: .85em;
+}
+
+@media (min-width: 768px) {
+  .aside {
+    top: var(--header-height);
+    left: 0;
+    width: var(--menu-width);
+		font-size: 1em;
+  }
+}
+
+.aside.active {
+  left: 0;
 }
 
 .aside .secondary {

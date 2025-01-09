@@ -1,14 +1,20 @@
 .legend {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0;
   margin: 0;
   text-transform: uppercase;
-  gap: 2em;
+  gap: .8em;
+	justify-content: center;
+	flex-basis: 0.25rem;
+
 
   > li {
     display: flex;
     align-items: center;
+		line-height: 0.5em;
+		font-size: 0.8em;
 
     &:before {
       content: '';
@@ -55,6 +61,19 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .legend {
+    flex-wrap: nowrap;
+		gap: 2em;
+		justify-content: normal;
+
+		> li {
+			line-height: 1.5em;
+			font-size: 1em;
+		}
   }
 }
 
